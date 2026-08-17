@@ -148,9 +148,6 @@ export function IdeaComposer({
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [status, setStatus] = useState<SubmitStatus>("idle");
-  const [canShareFiles] = useState(
-    () => typeof navigator !== "undefined" && typeof navigator.share === "function" && typeof navigator.canShare === "function"
-  );
   const [reducedMotion] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
@@ -208,20 +205,6 @@ export function IdeaComposer({
 
     if (!buildMessage) return;
     const message = buildMessage(idea.trim(), Boolean(logoFile));
-
-    if (logoFile && canShareFiles && navigator.canShare?.({ files: [logoFile] })) {
-      try {
-        await navigator.share({
-          title: "Ideia personalizada — Luma Lab",
-          text: message,
-          files: [logoFile]
-        });
-        return;
-      } catch (error) {
-        if ((error as Error)?.name === "AbortError") return;
-      }
-    }
-
     window.open(buildWhatsAppUrl(message), "_blank", "noreferrer");
   };
 
@@ -327,7 +310,7 @@ export function IdeaComposer({
                 <span className="text-xs font-medium text-ink/38">{idea.length} / {maxLength}</span>
               ) : logoFile ? (
                 <span className="text-xs leading-snug text-ink/40">
-                  {canShareFiles ? "Ao enviar, escolha o WhatsApp no menu de compartilhamento." : "O WhatsApp vai abrir com o texto pronto — anexe a imagem na conversa."}
+                  O WhatsApp vai abrir com o texto pronto — anexe a imagem na conversa.
                 </span>
               ) : (
                 <span aria-hidden="true" />

@@ -120,7 +120,7 @@ function ProductQuickViewContent({ product, onClose }: { product: Product; onClo
           <X size={18} />
         </button>
 
-        <div className="grid max-h-[calc(100dvh_-_16px)] overflow-y-auto md:max-h-[88vh] md:grid-cols-[1.15fr_0.85fr]">
+        <div className="grid max-h-[calc(100dvh_-_16px)] overflow-y-auto md:max-h-[88vh] md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
           <div className="p-4 pt-14 md:p-6 md:pt-6">
             <div className="grid gap-3 md:grid-cols-[1fr_104px] lg:grid-cols-[1fr_118px]">
               <div key={selectedImage} className="relative aspect-[4/3] max-h-[42dvh] overflow-hidden rounded-[22px] bg-[#f7f7f7] animate-[quickViewImage_340ms_cubic-bezier(0.22,1,0.36,1)_both] md:aspect-[4/5] md:max-h-none">
@@ -228,8 +228,8 @@ function ProductQuickViewContent({ product, onClose }: { product: Product; onClo
             </div>
           </div>
 
-          <div className="mt-2 p-5 pt-0 md:col-span-2 md:p-8 md:pt-0">
-            <ProductFeedbacks />
+          <div className="mt-2 min-w-0 p-5 pt-0 md:col-span-2 md:p-8 md:pt-0">
+            <ProductFeedbacks productSlug={product.slug} />
           </div>
         </div>
       </div>

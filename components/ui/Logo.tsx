@@ -10,6 +10,7 @@ export function Logo() {
         width={4116}
         height={2805}
         sizes="(max-width: 640px) 92px, 100px"
+        priority
         className="h-full w-full object-contain"
       />
     </Link>

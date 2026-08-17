@@ -43,7 +43,9 @@ export default function Home() {
 
           <div className="w-full overflow-hidden">
             <CatalogPreviewScroller>
-              {catalogPreview.map((product, index) => <HomeCatalogPreviewCard key={product.id} product={product} index={index} />)}
+              {catalogPreview.map((product, index) => (
+                <HomeCatalogPreviewCard key={product.id} product={product} index={index} priority={index < 2} />
+              ))}
             </CatalogPreviewScroller>
           </div>
 

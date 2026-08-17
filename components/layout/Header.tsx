@@ -62,6 +62,7 @@ export function Header() {
             width={4116}
             height={2805}
             sizes="80px"
+            priority
             className="h-full w-full object-contain"
           />
         </Link>

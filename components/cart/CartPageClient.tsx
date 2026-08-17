@@ -31,7 +31,7 @@ export function CartPageClient() {
         <div className="space-y-4">
           {items.map((item) => (
             <article key={item.lineId} className="grid gap-4 rounded-[22px] border border-line p-4 sm:grid-cols-[140px_1fr_auto]">
-              <ProductVisual tone={item.image} className="min-h-0 h-36" />
+              <ProductVisual tone={item.image} className="!h-36 !min-h-0 w-full" />
               <div>
                 <p className="font-display text-xl font-semibold">{item.name}</p>
                 <p className="mt-1 text-sm text-ink/55">{item.category}</p>

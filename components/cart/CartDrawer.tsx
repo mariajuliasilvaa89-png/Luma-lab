@@ -38,7 +38,7 @@ export function CartDrawer() {
             <div className="space-y-4">
               {items.map((item) => (
                 <div key={item.lineId} className="grid grid-cols-[84px_1fr] gap-3 border-b border-line pb-4">
-                  <ProductVisual tone={item.image} className="min-h-0 h-24 rounded-2xl" />
+                  <ProductVisual tone={item.image} className="!h-24 !min-h-0 w-full !rounded-2xl" />
                   <div>
                     <div className="flex items-start justify-between gap-2">
                       <div>

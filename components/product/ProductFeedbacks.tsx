@@ -1,5 +1,9 @@
 import { Star } from "lucide-react";
-import { testimonials } from "@/data/testimonials";
+import { getTestimonialsForProduct } from "@/data/testimonials";
+
+type ProductFeedbacksProps = {
+  productSlug: string;
+};
 
 function getInitials(name: string) {
   return name
@@ -10,9 +14,11 @@ function getInitials(name: string) {
     .join("");
 }
 
-export function ProductFeedbacks() {
+export function ProductFeedbacks({ productSlug }: ProductFeedbacksProps) {
+  const testimonials = getTestimonialsForProduct(productSlug);
+
   return (
-    <div>
+    <div className="min-w-0 w-full">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink/45">Feedbacks</p>
 
       {testimonials.length === 0 ? (
@@ -20,7 +26,7 @@ export function ProductFeedbacks() {
           Em breve, depoimentos de clientes por aqui.
         </div>
       ) : (
-        <div className="mt-4 flex gap-4 overflow-x-auto pb-1 [scrollbar-width:none] snap-x snap-mandatory [&::-webkit-scrollbar]:hidden">
+        <div className="mt-4 flex min-w-0 w-full gap-4 overflow-x-auto pb-1 [scrollbar-width:none] snap-x snap-mandatory [&::-webkit-scrollbar]:hidden">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
@@ -33,17 +39,15 @@ export function ProductFeedbacks() {
                 <p className="text-sm font-semibold">{testimonial.name}</p>
               </div>
 
-              {typeof testimonial.rating === "number" ? (
-                <div className="mt-3 flex gap-0.5" aria-label={`${testimonial.rating} de 5 estrelas`}>
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <Star
-                      key={index}
-                      size={14}
-                      className={index < testimonial.rating! ? "fill-luma-yellow text-luma-yellow" : "text-line"}
-                    />
-                  ))}
-                </div>
-              ) : null}
+              <div className="mt-3 flex gap-0.5" aria-label={`${testimonial.rating} de 5 estrelas`}>
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <Star
+                    key={index}
+                    size={14}
+                    className={index < testimonial.rating ? "fill-luma-yellow text-luma-yellow" : "text-line"}
+                  />
+                ))}
+              </div>
 
               <p className="mt-3 text-sm leading-6 text-ink/68">{testimonial.quote}</p>
             </div>
