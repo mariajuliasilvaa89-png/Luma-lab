@@ -9,10 +9,9 @@ import type { Product } from "@/types";
 type HomeCatalogPreviewCardProps = {
   product: Product;
   index: number;
-  priority?: boolean;
 };
 
-export function HomeCatalogPreviewCard({ product, index, priority = false }: HomeCatalogPreviewCardProps) {
+export function HomeCatalogPreviewCard({ product, index }: HomeCatalogPreviewCardProps) {
   const { openProductQuickView } = useProductQuickView();
   const imageSrc = getProductImageSrc(product);
 
@@ -29,7 +28,7 @@ export function HomeCatalogPreviewCard({ product, index, priority = false }: Hom
               src={imageSrc}
               alt={product.name}
               fill
-              priority={priority}
+              priority={index < 4}
               sizes="(max-width: 767px) 82vw, 25vw"
               className="block object-cover object-center"
             />
