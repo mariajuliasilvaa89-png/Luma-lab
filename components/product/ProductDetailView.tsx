@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { ColorSwatchPicker } from "@/components/product/ColorSwatchPicker";
 import { ProductConfigurator } from "@/components/product/ProductConfigurator";
 import { ProductVisual } from "@/components/ui/ProductVisual";
 import { getProductImagesForColor } from "@/lib/productImage";
@@ -25,8 +26,15 @@ export function ProductDetailView({ product }: { product: Product }) {
             ))}
           </div>
         ) : null}
+
+        {product.colors?.length ? (
+          <div className="mt-5">
+            <p className="mb-3 text-sm font-semibold">Cor</p>
+            <ColorSwatchPicker colors={product.colors} selected={color} onSelect={setColor} />
+          </div>
+        ) : null}
       </div>
-      <ProductConfigurator product={product} color={color} onColorChange={setColor} />
+      <ProductConfigurator product={product} color={color} />
     </div>
   );
 }

@@ -30,6 +30,11 @@ export const testimonialsByProduct: Record<string, Testimonial[]> = {
     { id: "chaveirinho-de-cruz-1", name: "Marcos Vinícius", quote: "Dei de lembrancinha de batismo do meu afilhado, ficou delicado e com muito significado.", rating: 5 },
     { id: "chaveirinho-de-cruz-2", name: "Sandra Oliveira", quote: "Uso todos os dias na chave de casa, é meu lembrete de fé no bolso.", rating: 5 },
     { id: "chaveirinho-de-cruz-3", name: "Gabriel Souza", quote: "Comprei personalizado com uma frase pra presentear minha mãe, ela ficou muito emocionada.", rating: 5 }
+  ],
+  "chaveiro-personalizado": [
+    { id: "chaveiro-personalizado-1", name: "Beatriz Andrade", quote: "Pedi na cor rosa pra combinar com a mochila da minha filha, ela não desgruda da bolsa. O acabamento surpreendeu pelo capricho.", rating: 5 },
+    { id: "chaveiro-personalizado-2", name: "Thiago Ramos", quote: "Encomendei em preto e dourado pra dar de brinde no lançamento da minha marca, ficou com cara de produto premium mesmo sendo simples.", rating: 5 },
+    { id: "chaveiro-personalizado-3", name: "Camila Duarte", quote: "Comprei um azul pra mim e outro bege pro meu namorado, ficou um par discreto e aguentou bem o uso do dia a dia.", rating: 4 }
   ]
 };
 

@@ -168,6 +168,13 @@ function ProductQuickViewContent({ product, onClose }: { product: Product; onClo
                 </div>
               ) : null}
             </div>
+
+            {product.colors?.length ? (
+              <div className="mt-5">
+                <p className="mb-3 text-sm font-semibold">Cor</p>
+                <ColorSwatchPicker colors={product.colors} selected={color} onSelect={setColor} />
+              </div>
+            ) : null}
           </div>
 
           <div className="relative flex flex-col p-5 pt-2 md:border-l md:border-line md:p-8 md:pt-16">
@@ -182,34 +189,25 @@ function ProductQuickViewContent({ product, onClose }: { product: Product; onClo
               <p className="mt-3 leading-7 text-ink/68 md:max-w-[46ch]">{product.description}</p>
             </div>
 
-            {product.colors?.length || product.customFields?.length ? (
+            {product.customFields?.length ? (
               <div className="mt-7 border-t border-line pt-6">
-                {product.colors?.length ? (
-                  <div>
-                    <p className="mb-3 text-sm font-semibold">Cor</p>
-                    <ColorSwatchPicker colors={product.colors} selected={color} onSelect={setColor} />
-                  </div>
-                ) : null}
-
-                {product.customFields?.length ? (
-                  <div className={`space-y-4 ${product.colors?.length ? "mt-7" : ""}`}>
-                    {product.customFields.map((field) => (
-                      <label key={field.id} className="block">
-                        <span className="mb-2 block text-sm font-semibold">{field.label}{field.required ? " *" : ""}</span>
-                        {field.type === "textarea" ? (
-                          <textarea className="focus-luma min-h-24 w-full rounded-2xl border border-line px-4 py-3 text-sm outline-none" placeholder={field.placeholder} onChange={(event) => setCustomValues((values) => ({ ...values, [field.label]: event.target.value }))} />
-                        ) : field.type === "select" ? (
-                          <select className="focus-luma h-12 w-full rounded-full border border-line px-4 text-sm outline-none" onChange={(event) => setCustomValues((values) => ({ ...values, [field.label]: event.target.value }))}>
-                            <option value="">Selecione</option>
-                            {field.options?.map((option) => <option key={option}>{option}</option>)}
-                          </select>
-                        ) : (
-                          <input type={field.type === "number" ? "number" : "text"} className="focus-luma h-12 w-full rounded-full border border-line px-4 text-sm outline-none" placeholder={field.placeholder} onChange={(event) => setCustomValues((values) => ({ ...values, [field.label]: event.target.value }))} />
-                        )}
-                      </label>
-                    ))}
-                  </div>
-                ) : null}
+                <div className="space-y-4">
+                  {product.customFields.map((field) => (
+                    <label key={field.id} className="block">
+                      <span className="mb-2 block text-sm font-semibold">{field.label}{field.required ? " *" : ""}</span>
+                      {field.type === "textarea" ? (
+                        <textarea className="focus-luma min-h-24 w-full rounded-2xl border border-line px-4 py-3 text-sm outline-none" placeholder={field.placeholder} onChange={(event) => setCustomValues((values) => ({ ...values, [field.label]: event.target.value }))} />
+                      ) : field.type === "select" ? (
+                        <select className="focus-luma h-12 w-full rounded-full border border-line px-4 text-sm outline-none" onChange={(event) => setCustomValues((values) => ({ ...values, [field.label]: event.target.value }))}>
+                          <option value="">Selecione</option>
+                          {field.options?.map((option) => <option key={option}>{option}</option>)}
+                        </select>
+                      ) : (
+                        <input type={field.type === "number" ? "number" : "text"} className="focus-luma h-12 w-full rounded-full border border-line px-4 text-sm outline-none" placeholder={field.placeholder} onChange={(event) => setCustomValues((values) => ({ ...values, [field.label]: event.target.value }))} />
+                      )}
+                    </label>
+                  ))}
+                </div>
               </div>
             ) : null}
 

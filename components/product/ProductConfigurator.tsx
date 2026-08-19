@@ -3,17 +3,15 @@
 import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/components/cart/CartContext";
-import { ColorSwatchPicker } from "@/components/product/ColorSwatchPicker";
 import { formatCurrency } from "@/lib/format";
 import type { Product } from "@/types";
 
 type ProductConfiguratorProps = {
   product: Product;
   color: string;
-  onColorChange: (color: string) => void;
 };
 
-export function ProductConfigurator({ product, color, onColorChange }: ProductConfiguratorProps) {
+export function ProductConfigurator({ product, color }: ProductConfiguratorProps) {
   const [quantity, setQuantity] = useState(1);
   const [customValues, setCustomValues] = useState<Record<string, string>>({});
   const { addItem } = useCart();
@@ -24,13 +22,6 @@ export function ProductConfigurator({ product, color, onColorChange }: ProductCo
       <h1 className="mt-3 font-display text-4xl font-semibold tracking-normal md:text-5xl">{product.name}</h1>
       {typeof product.price === "number" ? <p className="mt-4 text-2xl font-semibold">{formatCurrency(product.price)}</p> : null}
       <p className="mt-5 leading-7 text-ink/68">{product.description}</p>
-
-      {product.colors?.length ? (
-        <div className="mt-7">
-          <p className="mb-3 text-sm font-semibold">Cor</p>
-          <ColorSwatchPicker colors={product.colors} selected={color} onSelect={onColorChange} />
-        </div>
-      ) : null}
 
       {product.customFields?.length ? (
         <div className="mt-7 space-y-4">
