@@ -202,6 +202,18 @@ body {
   }
 }
 
+@keyframes colorSwatchIn {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @keyframes ideaCheckDraw {
   from {
     stroke-dashoffset: 1;

@@ -1,3 +1,4 @@
+import { FILAMENT_COLOR_NAMES } from "@/lib/colors";
 import type { Product } from "@/types";
 
 export const products: Product[] = [
@@ -13,6 +14,7 @@ export const products: Product[] = [
       "/images/abridor-beijinho/img-02",
       "/images/abridor-beijinho/img-03"
     ],
+    colors: FILAMENT_COLOR_NAMES,
     featured: true
   },
   {
@@ -27,6 +29,7 @@ export const products: Product[] = [
       "/images/porta-cardapio/img-03.png",
       "/images/porta-cardapio/img-04.png"
     ],
+    colors: FILAMENT_COLOR_NAMES,
     featured: true
   },
   {
@@ -41,6 +44,7 @@ export const products: Product[] = [
       "/images/porta-foto/img-03.png",
       "/images/porta-foto/img-04.png"
     ],
+    colors: FILAMENT_COLOR_NAMES,
     featured: true
   },
   {
@@ -55,6 +59,7 @@ export const products: Product[] = [
       "/images/porta-joias/img-03.png",
       "/images/porta-joias/img-04.png"
     ],
+    colors: FILAMENT_COLOR_NAMES,
     featured: true
   },
   {
@@ -69,6 +74,28 @@ export const products: Product[] = [
       "/images/chaveiro-cruz/img-03.png",
       "/images/chaveiro-cruz/img-04.png"
     ],
+    colors: FILAMENT_COLOR_NAMES,
+    featured: true
+  },
+  {
+    id: "chaveiro-personalizado",
+    slug: "chaveiro-personalizado",
+    name: "Chaveiro Personalizado",
+    category: "Chaveiros",
+    description: "Chaveiro personalizado produzido em impressão 3D, disponível em várias cores.",
+    images: [
+      "/images/chaveiro-personalizado/azul/azul-1.png",
+      "/images/chaveiro-personalizado/azul/azul-2.png"
+    ],
+    colors: FILAMENT_COLOR_NAMES,
+    colorImages: {
+      Azul: ["/images/chaveiro-personalizado/azul/azul-1.png", "/images/chaveiro-personalizado/azul/azul-2.png"],
+      Bege: ["/images/chaveiro-personalizado/bege/bege-1.png", "/images/chaveiro-personalizado/bege/bege-2.png"],
+      Branco: ["/images/chaveiro-personalizado/branco/branco-1.png", "/images/chaveiro-personalizado/branco/branco-2.png"],
+      Marrom: ["/images/chaveiro-personalizado/marrom/marrom-1.png", "/images/chaveiro-personalizado/marrom/marrom-2.png"],
+      Preto: ["/images/chaveiro-personalizado/preto/preto-1.png", "/images/chaveiro-personalizado/preto/preto-2.png"],
+      Rosa: ["/images/chaveiro-personalizado/rosa/rosa-1.png", "/images/chaveiro-personalizado/rosa/rosa-2.png"]
+    },
     featured: true
   }
 ];

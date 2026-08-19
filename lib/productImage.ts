@@ -12,6 +12,15 @@ export function getProductGalleryImages(product: Product) {
   return Array.from(new Set(images));
 }
 
+export function getProductImagesForColor(product: Product, color?: string) {
+  const baseImages = (color && product.colorImages?.[color]) || product.images;
+  const images = baseImages
+    .map((src) => withImageVersion(src, product.imageVersion))
+    .filter((src): src is string => Boolean(src));
+
+  return Array.from(new Set(images));
+}
+
 export function withImageVersion(src: string | undefined, version?: number) {
   if (!src || !version || !src.startsWith("/")) return src;
   const separator = src.includes("?") ? "&" : "?";

@@ -4,10 +4,11 @@ import { Minus, Plus, X } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useCart } from "@/components/cart/CartContext";
+import { ColorSwatchPicker } from "@/components/product/ColorSwatchPicker";
 import { ProductFeedbacks } from "@/components/product/ProductFeedbacks";
 import { ProductVisual } from "@/components/ui/ProductVisual";
 import { formatCurrency } from "@/lib/format";
-import { getProductGalleryImages } from "@/lib/productImage";
+import { getProductImagesForColor } from "@/lib/productImage";
 import type { Product } from "@/types";
 
 type ProductQuickViewProps = {
@@ -42,11 +43,17 @@ function ProductQuickViewContent({ product, onClose }: { product: Product; onClo
   const { addItem } = useCart();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-  const galleryImages = useMemo(() => getProductGalleryImages(product).slice(0, 5), [product]);
-  const [selectedImage, setSelectedImage] = useState(() => galleryImages[0] ?? "");
-  const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState(product.colors?.[0] ?? "");
+  const galleryImages = useMemo(() => getProductImagesForColor(product, color).slice(0, 5), [product, color]);
+  const [selectedImage, setSelectedImage] = useState(() => galleryImages[0] ?? "");
+  const [previousGalleryImages, setPreviousGalleryImages] = useState(galleryImages);
+  const [quantity, setQuantity] = useState(1);
   const [customValues, setCustomValues] = useState<Record<string, string>>({});
+
+  if (galleryImages !== previousGalleryImages) {
+    setPreviousGalleryImages(galleryImages);
+    setSelectedImage(galleryImages[0] ?? "");
+  }
 
   useEffect(() => {
     const previousBodyOverflow = document.body.style.overflow;
@@ -180,17 +187,7 @@ function ProductQuickViewContent({ product, onClose }: { product: Product; onClo
                 {product.colors?.length ? (
                   <div>
                     <p className="mb-3 text-sm font-semibold">Cor</p>
-                    <div className="flex flex-wrap gap-2">
-                      {product.colors.map((option) => (
-                        <button
-                          key={option}
-                          className={`focus-luma rounded-full border px-4 py-2 text-sm transition ${color === option ? "border-graphite bg-graphite text-white" : "border-line hover:border-graphite"}`}
-                          onClick={() => setColor(option)}
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
+                    <ColorSwatchPicker colors={product.colors} selected={color} onSelect={setColor} />
                   </div>
                 ) : null}
 

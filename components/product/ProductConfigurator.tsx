@@ -3,12 +3,18 @@
 import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/components/cart/CartContext";
+import { ColorSwatchPicker } from "@/components/product/ColorSwatchPicker";
 import { formatCurrency } from "@/lib/format";
 import type { Product } from "@/types";
 
-export function ProductConfigurator({ product }: { product: Product }) {
+type ProductConfiguratorProps = {
+  product: Product;
+  color: string;
+  onColorChange: (color: string) => void;
+};
+
+export function ProductConfigurator({ product, color, onColorChange }: ProductConfiguratorProps) {
   const [quantity, setQuantity] = useState(1);
-  const [color, setColor] = useState(product.colors?.[0] ?? "");
   const [customValues, setCustomValues] = useState<Record<string, string>>({});
   const { addItem } = useCart();
 
@@ -22,13 +28,7 @@ export function ProductConfigurator({ product }: { product: Product }) {
       {product.colors?.length ? (
         <div className="mt-7">
           <p className="mb-3 text-sm font-semibold">Cor</p>
-          <div className="flex flex-wrap gap-2">
-            {product.colors.map((option) => (
-              <button key={option} className={`focus-luma rounded-full border px-4 py-2 text-sm transition ${color === option ? "border-graphite bg-graphite text-white" : "border-line hover:border-graphite"}`} onClick={() => setColor(option)}>
-                {option}
-              </button>
-            ))}
-          </div>
+          <ColorSwatchPicker colors={product.colors} selected={color} onSelect={onColorChange} />
         </div>
       ) : null}
 

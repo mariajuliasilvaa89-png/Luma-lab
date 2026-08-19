@@ -29,6 +29,7 @@ export type Product = {
   featured?: boolean;
   badge?: string;
   colors?: string[];
+  colorImages?: Record<string, string[]>;
   customizable?: boolean;
   customFields?: CustomField[];
 };

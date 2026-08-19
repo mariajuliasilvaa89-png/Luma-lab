@@ -1,9 +1,7 @@
 import { notFound } from "next/navigation";
-import { ProductConfigurator } from "@/components/product/ProductConfigurator";
 import { ProductCard } from "@/components/product/ProductCard";
-import { ProductVisual } from "@/components/ui/ProductVisual";
+import { ProductDetailView } from "@/components/product/ProductDetailView";
 import { getProductBySlug, products } from "@/data/products";
-import { getProductGalleryImages } from "@/lib/productImage";
 
 export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
@@ -25,27 +23,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
   if (!product) notFound();
 
   const related = products.filter((item) => item.slug !== product.slug && item.category === product.category).concat(products.filter((item) => item.slug !== product.slug)).slice(0, 4);
-  const galleryImages = getProductGalleryImages(product);
-  const [primaryImage, ...secondaryImages] = galleryImages;
 
   return (
     <main className="container-luma py-14">
-      <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-        <div>
-          <div className={galleryImages.length > 1 ? "flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-2 touch-pan-x [scrollbar-width:none] sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 sm:touch-auto [&::-webkit-scrollbar]:hidden" : "grid gap-4 sm:grid-cols-2"}>
-            <ProductVisual tone={primaryImage} className="aspect-square max-sm:min-w-full max-sm:flex-none max-sm:snap-start sm:col-span-2 sm:aspect-[4/3] lg:min-h-[420px]" label={product.badge} />
-            {secondaryImages.map((tone, index) => <ProductVisual key={`${tone}-${index}`} tone={tone} className="aspect-square max-sm:min-w-full max-sm:flex-none max-sm:snap-start" />)}
-          </div>
-          {galleryImages.length > 1 ? (
-            <div className="mt-3 flex justify-center gap-2 sm:hidden" aria-hidden="true">
-              {galleryImages.map((image) => (
-                <span key={image} className="h-1.5 w-1.5 rounded-full bg-ink/20" />
-              ))}
-            </div>
-          ) : null}
-        </div>
-        <ProductConfigurator product={product} />
-      </div>
+      <ProductDetailView product={product} />
 
       <section className="mt-16 border-t border-line pt-10">
         <h2 className="font-display text-3xl font-semibold">Detalhes do produto</h2>
